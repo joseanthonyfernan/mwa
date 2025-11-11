@@ -26,13 +26,13 @@ if (isset($_POST['submit'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';       
         $mail->SMTPAuth = true;
-        $mail->Username = 'mcchmhotelreservation@gmail.com';  
-        $mail->Password = 'bkdb giql jcxw mmcc'; 
+        $mail->Username = 'mr.renzs2024@gmail.com';  
+        $mail->Password = 'qwzi vmiv vrkp uzma'; 
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
         //Recipients
-        $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
+        $mail->setFrom('mr.renzs2024@gmail.com', 'Hotel Reservation');
         $mail->addAddress($_SESSION['email'], $_SESSION['name']); 
 
         // Content

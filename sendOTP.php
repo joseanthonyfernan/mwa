@@ -23,8 +23,8 @@ function sendOTP($email, $name, $lastname) {
         $mail->Host = 'smtp.gmail.com';       
         $mail->SMTPAuth = true;
         $mail->Username = 'mr.renzs2024@gmail.com';  
-        $mail->Password = 'wind cimi vmga dhww'; 
-        $mail->SMTPSecure = 'tls';
+        $mail->Password = 'qwzi vmiv vrkp uzma'; 
+        $mail->SMTPSecure = 'tls'; 
         $mail->Port = 587;
 
         // Enable SMTP Debugging
