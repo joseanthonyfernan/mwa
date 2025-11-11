@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
 
 <?php
-// require_once 'sendOTP.php';
+require_once 'sendOTP.php';
 if (isset($_POST['submit'])) {
 
     // Handle image upload
