@@ -1,22 +1,20 @@
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
 
 <?php
 require_once 'sendOTP.php';
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])){
 
-    // Handle image upload
-    $targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
-    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
-    $fileName = basename($_FILES["image"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+	$targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
+  $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
+  $fileName = basename($_FILES["image"]["name"]);
+  $uploadOk = 1;
+  $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-        echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
+  if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+      echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+  } else {
+      echo "Sorry, there was an error uploading your file.";
+  }
+	    
 
     // Server-side DOB validation
     $dob = $_POST['dbirth'];
@@ -27,66 +25,59 @@ if (isset($_POST['submit'])) {
 
     if ($age < 18) {
         $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
-        
-    } else {
-        // Proceed with form processing if age is valid
-        $arrival = $_SESSION['from']; 
-        $departure = $_SESSION['to'];
-        $ROOMID = $_SESSION['ROOMID'];
+      } else {};
+ $arival   = $_SESSION['from']; 
+  $departure = $_SESSION['to'];
+  /*$adults = $_SESSION['adults'];
+  $child = $_SESSION['child'];*/
+  // $adults = 1;
+  // $child = 1;
+  $ROOMID = $_SESSION['ROOMID'];
+ $_SESSION['image']   		= $fileName;
+ $_SESSION['name']   		= $_POST['name'];
+ $_SESSION['last']   		= $_POST['last'];
+ $_SESSION['gender']   		= $_POST['gender'];
+ $_SESSION['dbirth']   		= $_POST['dbirth'];
+ $_SESSION['nationality']   = $_POST['nationality'];
+ $_SESSION['city']   		= $_POST['city'];
+ $_SESSION['address'] 		= $_POST['address'];
+ $_SESSION['company']  		= $_POST['company'];
+ $_SESSION['caddress']  	= $_POST['caddress'];
+ $_SESSION['zip']   		= $_POST['zip'];
+ $_SESSION['phone']   		= $_POST['phone'];
+ $_SESSION['username']		= $_POST['username'];
+ $_SESSION['pass']  		= $_POST['pass'];
+ $_SESSION['pending']  		= 'pending';
 
-        $_SESSION['image'] = $fileName;
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['last'] = $_POST['last'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['dbirth'] = $_POST['dbirth'];
-        $_SESSION['zip'] = $_POST['zip'];
-        $_SESSION['nationality'] = $_POST['nationality'];
-        $_SESSION['city'] = $_POST['city'];
-        $_SESSION['address'] = $_POST['address'];
-        $_SESSION['company'] = $_POST['company'];
-        $_SESSION['caddress'] = $_POST['caddress'];
-        $_SESSION['phone'] = $_POST['phone'];
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['pass'] = $_POST['pass'];
-        $_SESSION['pending'] = 'pending';
-        // $_SESSION['otp'] = sendOTP($_SESSION['username']);
+
+  // $name   = $_SESSION['name']; 
+  // $last   = $_SESSION['last'];
+  // $country= $_SESSION['country'];
+  // $city   = $_SESSION['city'] ;
+  // $address =$_SESSION['address'];
+  // $zip    =  $_SESSION['zip'] ;
+  // $phone  = $_SESSION['phone'];
+  // $email  = $_SESSION['email'];
+  // $password =$_SESSION['pass'];
+
+
+  // $days = dateDiff($arival,$departure);
+
+  
+// redirect('index.php?view=payment');
+$_SESSION['otp'] = sendOTP($_SESSION['username'],$_SESSION['name'], $_SESSION['last']);
+//$_SESSION['otp'] = $otp;
+var_dump($_SESSION['otp']);
         // echo '<script>$("#otp-modal").modal("show");</script>';
         // Redirect to payment page
-  //        header('Location: index.php?view=payment');
-  //       exit();
-  //   }
-  // }
-  require_once 'sendOTP.php';
-    $otp = sendOTP($_SESSION['username']);
-
-    if ($otp !== null) {
-        $_SESSION['otp'] = $otp;
-        // Redirect to payment page
-        redirect('index.php?view=payment');
-    } else {
-        echo 'Error sending OTP.';
-    }
+         redirect('index.php?view=payment&verify');
 }
-?>
-
-<?php
-        // // Redirect to OTP verification page
-        // header('Location: otp_verify.php');
-//         // exit();
-//     }
-// }
-// //         // Redirect to payment page
-//         header('Location: index.php?view=payment');
-//         exit();
-//     }
-// }
 ?>
 
 
  
                  <?php //include'navigator.php';?>
-
-
+                
 			 
 					<?php
 					if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
@@ -98,19 +89,18 @@ if (isset($_POST['submit'])) {
 							unset($_SESSION['ERRMSG_ARR']);
 						}
 					?>
-					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    
-         		<form class="form-horizontal"   action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" >
+         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
-					 <div class="row">
+           <div class="row">
     <div class="col-md-12">
       <div class="form-group">
         <label class ="control-label" for="image">Avatar</label>
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
         <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 150px; max-height: 150px;">
       </div>
-			<style>
+      <style>
   /* Ensure the image preview is fixed at 300x300 pixels (2x2) */
   #imagePreview {
     display: none;
@@ -146,7 +136,8 @@ if (isset($_POST['submit'])) {
 			            </div>
 			          </div> 
 <br>
-					 <!-- Form Fields in Two Columns -->
+									
+					   <!-- Form Fields in Two Columns -->
   <div class="row">
     <!-- First Column -->
     <div class="col-md-6 col-sm-12">
@@ -226,26 +217,18 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
-    <span id="password-error" style="color: red;"></span>
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required  placeholder="Ex@mple123"/>
+    <!-- <span id="password-error" style="color: red;"></span> -->
+    <ul id="password-requirements" style="color: red; list-style-type: none; padding-left: 0;">
+        <li id="length-error">Password must be 8-12 characters long.</li>
+        <li id="capital-error">Password must contain at least one uppercase letter.</li>
+        <li id="number-error">Password must contain at least one number.</li>
+        <li id="special-error">Password must contain at least one special character.</li>
+    </ul>
 </div>
-
-
-      <!-- OTP input after email submission -->
-  <!-- <div class="form-group" id="otp-section" >
-        <label for="otp">Enter OTP:</label>
-        <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
-    </div> -->
-    </div>
-  </div>
+			            </div>
+			          </div>
  
-
-    
-
-    <p id="email-msg" style="color: green; display: none;">An OTP has been sent to your email. Please check your inbox.</p>
-
-
-
 					 &nbsp; &nbsp;
 				 <div class="form-group">
 			        <div class="col-md-6">
@@ -257,11 +240,11 @@ if (isset($_POST['submit'])) {
 						<!-- <img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><a href='javascript: refreshCaptcha();'><img src="<?php echo WEB_ROOT;?>images/refresh.png" alt="refresh" border="0" style="margin-top:5px; margin-left:5px;" /></a>
 						<br /><small>If you are a Human Enter the code above here :</small><input id="6_letters_code" name="6_letters_code" type="text" class="form-control input-sm" width="20"></p><br/>
 					 -->	<div class="col-md-4">
-    <input name="submit" type="submit" value="Confirm"  class="btn btn-primary" onclick="return personalInfo();" />
-</div>
+					    	<input name="submit" type="submit" value="Confirm"  class="btn btn-primary" onclick="return personalInfo();"/>
+					    </div>
 					</div>
 					NOTE: 
-					We recommend that your password should be at least 8 characters long and should be different from your username.
+					We recommend that your password should be at least 6 characters long and should be different from your username.
 					Your e-mail address must be valid. We use e-mail for communication purposes (order notifications, etc). Therefore, it is essential to provide a valid e-mail address to be able to use our services correctly.
 					All your private data is confidential. We will never sell, exchange or market it in any way. For further information on the responsibilities of both parties, you may refer to us.
 			    </div>
@@ -291,9 +274,7 @@ function validateDOB(input) {
     }
 }
 </script>
-
-
-<script>
+<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -306,73 +287,93 @@ function validatePassword() {
     if (password.length < 8) {
         passwordError.textContent = "Password must be at least 8 characters long.";
         passwordInput.setCustomValidity("Password must be at least 8 characters long.");
-        return false; // Prevent form submission
-    } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-        return false; // Prevent form submission
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
-        return false; // Prevent form submission
     } else if (!hasNumber) {
         passwordError.textContent = "Password must contain at least one number.";
         passwordInput.setCustomValidity("Password must contain at least one number.");
-        return false; // Prevent form submission
+    } else if (!hasCapital) {
+        passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
-        passwordError.textContent = ""; // Clear error message
-        passwordInput.setCustomValidity(""); // Clear custom validity
-        return true; // Password is valid
+        passwordError.textContent = "";
+        passwordInput.setCustomValidity("");
     }
 }
-
-document.querySelector('form').onsubmit = function () {
-    return validatePassword(); // Validate password before form submission
-};
-</script>
-
-<!-- OTP Modal -->
-<div id="otp-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Enter OTP</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="otp-form">
-                    <div class="form-group">
-                        <label for="otp">Enter OTP:</label>
-                        <input type="text" name="otp" id="otp" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Verify</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+</script> -->
 <script>
-$('#otp-form').submit(function(event) {
-    event.preventDefault();
-    var otp = $('#otp').val();
-    $.ajax({
-        type: 'POST',
-        url: 'otp_verify.php',
-        data: {otp: otp},
-        success: function(response) {
-            if (response == 'Invalid OTP. Please try again.') {
-                alert(response);
-            } else {
-                // OTP verified, redirect to payment page
-                window.location.href = 'index.php?view=payment';
-            }
-        }
-    });
-});
+function validatePassword() {
+    const password = document.getElementById('password').value;
+
+    // Regex patterns for validation
+    const lengthPattern = /.{8,12}/;  // 8-12 characters
+    const capitalPattern = /[A-Z]/;   // At least one uppercase letter
+    const numberPattern = /\d/;       // At least one number
+    const specialPattern = /[@$!%*?&]/; // At least one special character
+
+    // Select the error messages
+    const lengthError = document.getElementById('length-error');
+    const capitalError = document.getElementById('capital-error');
+    const numberError = document.getElementById('number-error');
+    const specialError = document.getElementById('special-error');
+
+    // Validate each rule and hide or show the corresponding error message
+    lengthError.style.display = lengthPattern.test(password) ? 'none' : 'list-item';
+    capitalError.style.display = capitalPattern.test(password) ? 'none' : 'list-item';
+    numberError.style.display = numberPattern.test(password) ? 'none' : 'list-item';
+    specialError.style.display = specialPattern.test(password) ? 'none' : 'list-item';
+
+    // Check if all requirements are met
+    const allValid = lengthPattern.test(password) &&
+                     capitalPattern.test(password) &&
+                     numberPattern.test(password) &&
+                     specialPattern.test(password);
+
+    // Set form validation state based on all requirements being met or not
+    document.getElementById('password').setCustomValidity(allValid ? '' : 'Invalid password');
+}
 </script>
-	
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const firstInput = document.getElementById('name');
+        const lastInput = document.getElementById('last');
+        const phoneInput = document.getElementById('phone');
+        const cityInput = document.getElementById('city');
+        const addressInput = document.getElementById('address');
+        const zipInput = document.getElementById('zip');
+        const nationalityInput = document.getElementById('nationality');
+        const companyInput = document.getElementById('company');
+        const caddressInput = document.getElementById('caddress');
+        const emailInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        detectXSS(firstInput, 'First Name');
+        detectXSS(lastInput, 'Last Name');
+        detectXSS(phoneInput, 'Phone');
+        detectXSS(cityInput, 'City');
+        detectXSS(addressInput, 'Address');
+        detectXSS(zipInput, 'Zip Code');
+        detectXSS(nationalityInput, 'Nationality');
+        detectXSS(companyInput, 'Company');
+        detectXSS(caddressInput, 'Company Address');
+        detectXSS(emailInput, 'Email');
+        detectXSS(passwordInput, 'Password');
+    });
+</script>
 
 
+                 
+			
+ 
