@@ -162,7 +162,7 @@ if (!empty($missingRequirements)) {
 }
 
 // Display error messages if any
-if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION[' ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
+if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
   echo '<ul class="err">';
   foreach ($_SESSION['ERRMSG_ARR'] as $msg) {
       echo '<li>' . htmlspecialchars($msg) . '</li>';
