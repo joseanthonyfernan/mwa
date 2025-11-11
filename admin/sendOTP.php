@@ -15,13 +15,13 @@ function sendOTPEmail($toEmail, $otp) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to use
         $mail->SMTPAuth = true;
-        $mail->Username = 'mcchmhotelreservation@gmail.com'; // SMTP username
-        $mail->Password = 'bkdb giql jcxw mmcc'; // SMTP password or app-specific password
+        $mail->Username = 'mr.renzs2024@gmail.com'; // SMTP username
+        $mail->Password = 'wind cimi vmga dhww'; // SMTP password or app-specific password
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
+        $mail->setFrom('mr.renzs2024@gmail.com', 'Hotel Reservation');
         $mail->addAddress($toEmail); // Add a recipient
 
         // Content
