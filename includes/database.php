@@ -26,7 +26,7 @@ class Database {
 	}
 	
 	public function open_connection() {
-		$this->conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb','u510162695_hmsystemdb', '3306');
+		$this->conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemd', 'z$J0n;c&=^gR','u510162695_hmsystemd', '3306');
 		if(!$this->conn){
 			echo "Problem in database connection! Contact administrator!";
 			exit();
