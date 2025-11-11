@@ -15,7 +15,7 @@ try{
     $mail->SMTPDebug = 2; // Enable verbose debug output
 
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'mcchmhotelreservation.com';                     //Set the SMTP server to send through
+    $mail->Host       = 'mr.renzs2024@gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'ungonkathleen@gmail.com';                     //SMTP username
     $mail->Password   = 'oeaou moot albc ucmx';                               //SMTP password    
