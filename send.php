@@ -24,7 +24,7 @@ $mail->Port       = 465;                                      //TCP port to conn
 
     //Recipients
     $mail->setFrom('joseanthonyfernan@gmail.com', 'Mailer');
-    $mail->addAddress('kyasurinungz@gmail.com', 'Joe User');     //Add a recipient
+    $mail->addAddress('hapersounds@gmail.com', 'Joe User');     //Add a recipient
     
 
     //Content
