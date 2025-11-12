@@ -34,10 +34,10 @@ if (isset($_POST['reset_request'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.example.com'; // Your SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'mcchmhotelreservation@gmail.com'; // Your email
-            $mail->Password = 'bkdb giql jcxw mmcc'; // Your email password
+            $mail->Username = 'mr.renzs2024@gmail.com'; // Your email
+            $mail->Password = 'qwzi vmiv vrkp uzma'; // Your email password
             $mail->Port = 587; // SMTP port
-            $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
+            $mail->setFrom('mr.renzs2024@gmail.com', 'Hotel Reservation');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request';
